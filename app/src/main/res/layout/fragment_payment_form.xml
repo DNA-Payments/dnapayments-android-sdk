@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.dna.sdk.demo.ui.payment.form.PaymentFormViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F4F5F9">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                tools:context=".ui.payment.auth.PaymentAuthFragment">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/description"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/black"
+                            android:enabled="@{!viewModel.progress}"
+                            android:text="@={viewModel.descriptionField}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/phone"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/black"
+                            android:enabled="@{!viewModel.progress}"
+                            android:text="@={viewModel.phoneField}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/email"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}"
+                            android:textColor="@color/black"
+                            android:inputType="textEmailAddress"
+                            android:text="@={viewModel.emailField}" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/transaction_type"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <Spinner
+                            android:id="@+id/sp_transaction_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/recurring_transaction_type"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <Spinner
+                            android:id="@+id/sp_recurring_transaction_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/periodic_type"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <Spinner
+                            android:id="@+id/sp_periodic_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/enter_card_number"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/card_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:digits=" 1234567890"
+                            android:enabled="@{!viewModel.progress}"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="22"
+                            android:text="@={viewModel.cardNumberField}"
+                            android:textSize="16sp" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="72dp">
+
+                            <TextView
+                                android:id="@+id/date_title_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:paddingBottom="4dp"
+                                android:text="@string/card_expiration_date"
+                                android:textAllCaps="true"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <LinearLayout
+                                android:id="@+id/date_block_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintStart_toStartOf="@+id/date_title_text_view"
+                                app:layout_constraintTop_toBottomOf="@+id/date_title_text_view">
+
+                                <Spinner
+                                    android:id="@+id/sp_month"
+                                    android:layout_width="86dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="2dp"
+                                    android:dropDownWidth="64dp"
+                                    android:enabled="@{!viewModel.progress}" />
+
+                                <TextView
+                                    android:id="@+id/slash"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginEnd="8dp"
+                                    android:gravity="center"
+                                    android:text="/"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp" />
+
+                                <Spinner
+                                    android:id="@+id/sp_year"
+                                    android:layout_width="86dp"
+                                    android:layout_height="wrap_content"
+                                    android:dropDownWidth="64dp"
+                                    android:enabled="@{!viewModel.progress}" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/date_underline_view"
+                                android:layout_width="0dp"
+                                android:layout_height="1px"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/white"
+                                app:layout_constraintEnd_toEndOf="@+id/date_block_layout"
+                                app:layout_constraintStart_toStartOf="@+id/date_block_layout"
+                                app:layout_constraintTop_toBottomOf="@+id/date_block_layout" />
+
+                            <TextView
+                                android:id="@+id/cvc_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:text="@string/cvv_code"
+                                android:textAllCaps="true"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/date_title_text_view"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/date_title_text_view" />
+
+                            <EditText
+                                android:id="@+id/cvv"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:digits=" 1234567890"
+                                android:enabled="@{!viewModel.progress}"
+                                android:imeOptions="actionDone"
+                                android:inputType="numberPassword"
+                                android:maxLength="4"
+                                android:text="@={viewModel.cardCvvField}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="@+id/cvc_text_view"
+                                app:layout_constraintStart_toStartOf="@+id/cvc_text_view"
+                                app:layout_constraintTop_toBottomOf="@+id/cvc_text_view" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/country"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_country"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}"
+                            android:text="@={viewModel.countryField}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/city"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}"
+                            android:text="@={viewModel.cityField}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/street_address_1"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_street_address_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}"
+                            android:text="@={viewModel.addressOneField}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/street_address_2"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_street_address_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}"
+                            android:text="@={viewModel.addressTwoField}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/first_name"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_first_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}"
+                            android:text="@={viewModel.firstNameField}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/last_name"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}"
+                            android:text="@={viewModel.lastNameField}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/postal_code"
+                            android:textAllCaps="true"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_postal_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:enabled="@{!viewModel.progress}"
+                            android:text="@={viewModel.postalCodeField}" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btn_authorise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:enabled="@{!viewModel.progress}"
+                    android:onClick="@{v -> viewModel.onConfirmClick()}"
+                    android:text="@string/confirm" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{viewModel.progress ? View.VISIBLE : View.INVISIBLE, default = invisible}" />
+
+    </RelativeLayout>
+</layout>

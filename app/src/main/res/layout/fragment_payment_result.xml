@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.dna.sdk.demo.ui.payment.form.PaymentFormViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F4F5F9">
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="16dp"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            tools:text="Success" />
+
+        <ImageView
+            android:id="@+id/iv_result"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_above="@id/tv_result"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_success" />
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:text="@string/close" />
+
+    </RelativeLayout>
+</layout>

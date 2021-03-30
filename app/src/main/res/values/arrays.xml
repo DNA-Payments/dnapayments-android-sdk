@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="currency_array">
+        <item>GBP</item>
+    </string-array>
+
+    <string-array name="month_array">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <string-array name="year_array">
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+    </string-array>
+
+    <string-array name="transaction_type_array">
+        <item>AUTH</item>
+        <item>SALE</item>
+        <item>TOKENIZATION</item>
+        <item>RECURRING</item>
+    </string-array>
+
+    <string-array name="recurring_trans_type_array">
+        <item>AUTH</item>
+        <item>SALE</item>
+    </string-array>
+
+    <string-array name="periodic_type_array">
+        <item>recurring</item>
+        <item>installment</item>
+        <item>ucof</item>
+        <item>ci</item>
+    </string-array>
+</resources>

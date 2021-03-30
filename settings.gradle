@@ -1,0 +1,3 @@
+include ':dnapayments'
+include ':app'
+rootProject.name = "Dna Sdk Demo"
