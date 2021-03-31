@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'maven-publish'
 }
 
 android {
@@ -58,23 +59,70 @@ ext {
 
 dependencies {
     // kotlin
-    implementation 'androidx.core:core-ktx:1.3.2'
+    api 'androidx.core:core-ktx:1.3.2'
 
     // coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.9'
-    implementation 'net.sourceforge.streamsupport:android-retrostreams:1.7.3'
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.9'
+    api 'net.sourceforge.streamsupport:android-retrostreams:1.7.3'
 
     // network
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
     // koin
-    implementation "org.koin:koin-android:$koinVersion"
-    implementation "org.koin:koin-android-scope:$koinVersion"
+    api "org.koin:koin-android:$koinVersion"
+    api "org.koin:koin-android-scope:$koinVersion"
 
     // WebSocket
-    implementation 'com.neovisionaries:nv-websocket-client:2.13'
+    api 'com.neovisionaries:nv-websocket-client:2.13'
 
+}
+
+
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+def getVersionName = { ->
+    return "0.9.3"
+}
+
+def getArtificatId = { ->
+    return "dnapayments"
+}
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId 'com.dna.sdk'
+            artifactId getArtificatId()
+            version getVersionName()
+            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+
+                configurations.api.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            /** Configure path of your package repository on Github
+             *  Replace GITHUB_USERID with your/organisation Github userID and REPOSITORY with the repository name on GitHub
+             */
+            url = uri("https://maven.pkg.github.com/DNA-Payments/dnapayments-android-sdk")
+
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+    }
 }
