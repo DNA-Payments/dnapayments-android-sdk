@@ -152,13 +152,25 @@ class PaymentFormFragment : ViewModelFragment(), AdapterView.OnItemSelectedListe
                 viewModel.selectedYear = selection
             }
             R.id.sp_periodic_type -> {
-                viewModel.selectedPeriodicType = selection
+                if (pos != 0) {
+                    viewModel.selectedPeriodicType = selection
+                } else {
+                    viewModel.selectedPeriodicType = ""
+                }
             }
             R.id.sp_recurring_transaction_type -> {
-                viewModel.selectedRecurringTxnType = selection
+                if (pos != 0) {
+                    viewModel.selectedRecurringTxnType = selection
+                } else {
+                    viewModel.selectedRecurringTxnType = ""
+                }
             }
             R.id.sp_transaction_type -> {
-                viewModel.selectedTxnType = selection
+                if(pos != 0) {
+                    viewModel.selectedTxnType = selection
+                } else {
+                    viewModel.selectedTxnType = ""
+                }
             }
         }
     }

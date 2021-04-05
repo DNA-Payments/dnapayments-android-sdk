@@ -33,6 +33,7 @@
     </string-array>
 
     <string-array name="transaction_type_array">
+        <item>Select an Option...</item>
         <item>AUTH</item>
         <item>SALE</item>
         <item>TOKENIZATION</item>
@@ -40,11 +41,13 @@
     </string-array>
 
     <string-array name="recurring_trans_type_array">
+        <item>Select an Option...</item>
         <item>AUTH</item>
         <item>SALE</item>
     </string-array>
 
     <string-array name="periodic_type_array">
+        <item>Select an Option...</item>
         <item>recurring</item>
         <item>installment</item>
         <item>ucof</item>
