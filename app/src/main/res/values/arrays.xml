@@ -50,4 +50,9 @@
         <item>ucof</item>
         <item>ci</item>
     </string-array>
+
+    <string-array name="terminal_array">
+        <item>b553ffcc-7df4-47b1-887b-fa4108af9c85</item>
+        <item>8911a14f-61a3-4449-a1c1-7a314ee5774c</item>
+    </string-array>
 </resources>

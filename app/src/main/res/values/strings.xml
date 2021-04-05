@@ -29,4 +29,8 @@
     <string name="authorization_error">Authorization error</string>
     <string name="invalid_amount">Invalid amount</string>
     <string name="enter_transaction_id">Enter transaction ID</string>
+    <string name="settings">Settings</string>
+    <string name="choose_terminal_id">Choose terminal ID</string>
+    <string name="save">Save</string>
+    <string name="enter_terminal_id">Enter terminal ID</string>
 </resources>

@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_mainFragment_to_txnListFragment"
             app:destination="@id/txnListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
@@ -99,4 +102,8 @@
             android:id="@+id/action_txnListFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.dna.sdk.demo.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

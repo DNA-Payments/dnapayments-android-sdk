@@ -2,20 +2,20 @@ package com.dna.sdk.demo
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import androidx.navigation.fragment.findNavController
 import com.dna.sdk.demo.compose.ViewModelFragment
 import com.dna.sdk.demo.databinding.FragmentMainBinding
 
+
 class MainFragment : ViewModelFragment() {
     private lateinit var binding: FragmentMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -49,6 +49,21 @@ class MainFragment : ViewModelFragment() {
     companion object {
         @JvmStatic
         fun newInstance() = MainFragment()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> {
+                val directions = MainFragmentDirections.actionMainFragmentToSettingsFragment()
+                findNavController().navigate(directions)
+            }
+        }
+        return true
     }
 
     private fun showTxnDialog() {
