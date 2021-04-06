@@ -32,11 +32,12 @@ class DemoApp : Application() {
             preferences.setTerminalId(defaultTerminals[0])
         }
 
+        val terminalId = preferences.getTerminalId()
         DnaSdk(
             MerchantCredentials(
                 clientId = "Test Merchant",
                 clientSecret = "PoF84JqIG8Smv5VpES9bcU31kmfSqLk8Jdo7",
-                terminalId = preferences.getTerminalId(),
+                terminalId = terminalId,
                 environment = Environment.DEV,
                 loggingEnabled = true
             )

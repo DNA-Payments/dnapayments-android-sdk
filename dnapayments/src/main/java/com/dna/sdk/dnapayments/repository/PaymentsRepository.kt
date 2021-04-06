@@ -12,7 +12,6 @@ import org.koin.core.inject
 internal class PaymentsRepository : Repository, CustomKoinComponent() {
 
     private val paymentsClient: PaymentClient by inject()
-    private val terminalId = DnaSdkCredentials.terminalId
 
     companion object {
         private var INSTANCE: PaymentsRepository? = null
@@ -28,7 +27,7 @@ internal class PaymentsRepository : Repository, CustomKoinComponent() {
         token: String, paymentData: PaymentData
     ): ApiResponse<EnrollmentResponse> {
         return withContext(Dispatchers.IO) {
-            paymentData.terminalId = terminalId
+            paymentData.terminalId = DnaSdkCredentials.terminalId
 
             paymentsClient.enrollmentPayment(
                 String.format("Bearer %s", token),

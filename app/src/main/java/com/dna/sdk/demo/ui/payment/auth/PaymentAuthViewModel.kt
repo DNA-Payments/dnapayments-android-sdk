@@ -21,7 +21,7 @@ class PaymentAuthViewModel : DispatchViewModel() {
     private val _loadAuthTokenLiveData = MutableLiveData<Event<AuthToken>>()
     val loadAuthTokenLiveData: LiveData<Event<AuthToken>> get() = _loadAuthTokenLiveData
 
-    val onErrorLiveData: MutableLiveData<String> = MutableLiveData()
+    val onErrorLiveData: MutableLiveData<Event<String>> = MutableLiveData()
 
     var selectedCurrency = "GBP"
     var invoiceId = ""
@@ -62,7 +62,7 @@ class PaymentAuthViewModel : DispatchViewModel() {
     }
 
     private fun showErrorMessage(message: String) {
-        onErrorLiveData.postValue(message)
+        onErrorLiveData.postValue(Event(message))
     }
 
 }

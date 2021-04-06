@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class ErrorResponse(
     @SerializedName("errorCode") val code: Int,
-    @SerializedName("message") val message: String
+    @SerializedName("message") var message: String
 )

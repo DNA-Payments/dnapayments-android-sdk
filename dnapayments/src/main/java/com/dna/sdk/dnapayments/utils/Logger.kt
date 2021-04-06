@@ -3,6 +3,7 @@ package com.dna.sdk.dnapayments.utils
 import android.util.Log
 import com.dna.sdk.dnapayments.DnaSdkCredentials
 import com.dna.sdk.dnapayments.api.ApiResponse
+import com.dna.sdk.dnapayments.models.network.PaymentResult
 import com.dna.sdk.dnapayments.models.network.payments.PaymentData
 import com.google.gson.Gson
 import com.google.gson.JsonElement
@@ -83,9 +84,20 @@ object Logger {
         }
     }
 
+    fun logPaymentResult(result: PaymentResult) {
+        if (isLogging) {
+            try {
+                val json = Gson().toJson(result)
+                d(content = json, subTag = "Response")
+            } catch (ex: Exception) {
+                d(content = "data: ${ex.message}", subTag = "Response Log Error")
+            }
+        }
+    }
+
     private fun d(content: String?, subTag: String = "") {
         if (isLogging) {
-            Log.d(TAG + "_" + subTag, content)
+            Log.e(TAG + "_" + subTag, content)
         }
     }
 

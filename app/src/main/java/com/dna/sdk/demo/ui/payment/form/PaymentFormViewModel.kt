@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class PaymentFormViewModel : DispatchViewModel() {
 
-    val onErrorLiveData: MutableLiveData<String> = MutableLiveData()
+    val onErrorLiveData: MutableLiveData<Event<String>> = MutableLiveData()
 
     var progress = ObservableBoolean(false)
 
@@ -83,7 +83,8 @@ class PaymentFormViewModel : DispatchViewModel() {
             .setTransactionType(selectedTxnType)
             //.setPostLink("test Post Link")
             //.setFailurePostLink("test Failure Post Link")
-            .setIpAddress("")
+            //get ip address from device
+            .setIpAddress("192.168.0.11")
             .setBillingAddress(address)
             .setCard(card).build()
     }
@@ -123,6 +124,6 @@ class PaymentFormViewModel : DispatchViewModel() {
     }
 
     fun showErrorMessage(message: String) {
-        onErrorLiveData.postValue(message)
+        onErrorLiveData.postValue(Event(message))
     }
 }

@@ -129,6 +129,7 @@ class PaymentWebFragment : ViewModelFragment(), DnaPaymentResult {
     }
 
     override fun onPaymentFailure(paymentResult: PaymentResult) {
+        saveTxn()
         handleResultStatus(paymentResult)
     }
 

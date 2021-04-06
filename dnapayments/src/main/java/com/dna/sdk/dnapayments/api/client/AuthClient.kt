@@ -4,6 +4,7 @@ import com.dna.sdk.dnapayments.api.ApiResponse
 import com.dna.sdk.dnapayments.api.service.AuthService
 import com.dna.sdk.dnapayments.models.network.AuthToken
 import com.dna.sdk.dnapayments.utils.Logger
+import com.dna.sdk.dnapayments.utils.Validator
 
 internal class AuthClient(private val service: AuthService) {
 
@@ -31,6 +32,10 @@ internal class AuthClient(private val service: AuthService) {
             paymentFormUrl,
             source
         )
+
+        if (!Validator.isAuthFieldsValidated(amount, currency, invoiceId, terminal)) {
+            return ApiResponse.getFieldErrorResponse()
+        }
 
         val response = ApiResponse.create(
             service.getUserToken(

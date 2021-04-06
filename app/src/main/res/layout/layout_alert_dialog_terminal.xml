@@ -54,6 +54,6 @@
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_comment" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_terminal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

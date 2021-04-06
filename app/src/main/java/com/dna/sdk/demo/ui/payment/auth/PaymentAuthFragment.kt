@@ -61,7 +61,9 @@ class PaymentAuthFragment : ViewModelFragment(), AdapterView.OnItemSelectedListe
         })
 
         viewModel.onErrorLiveData.observe(viewLifecycleOwner, Observer {
-            showToast(requireContext(), it)
+            it.getContentIfNotHandled()?.let { message ->
+                showToast(requireContext(), message)
+            }
         })
 
         binding.etAmount.addTextChangedListener {

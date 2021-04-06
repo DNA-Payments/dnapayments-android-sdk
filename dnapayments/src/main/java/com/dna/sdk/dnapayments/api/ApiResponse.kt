@@ -1,6 +1,7 @@
 package com.dna.sdk.dnapayments.api
 
 import androidx.annotation.Keep
+import com.dna.sdk.dnapayments.models.network.ErrorApiResponse
 import com.dna.sdk.dnapayments.models.network.ErrorResponse
 import com.google.gson.Gson
 import okhttp3.ResponseBody
@@ -35,17 +36,27 @@ sealed class ApiResponse<out T> {
     @Keep
     sealed class Failure<out T> {
         @Keep
-        class Error<out T>(response: Response<out T>) : ApiResponse<T>() {
-            val responseBody: ResponseBody? = response.errorBody()
-            val error = try {
-                    Gson().fromJson(responseBody?.string(), ErrorResponse::class.java)
+        class Error<out T>(response: Response<out T>?, localFieldError: Boolean = false) :
+            ApiResponse<T>() {
+            private val responseBody: ResponseBody? = response?.errorBody()
+
+            val error: ErrorResponse = try {
+                if (localFieldError) {
+                    ErrorResponse(-1000, "Validation error: some of the parameters is empty")
+                } else {
+                    val originalResponse =
+                        Gson().fromJson(responseBody?.string(), ErrorApiResponse::class.java)
+                    val code: Int = originalResponse.authCode ?: originalResponse.code ?: 0
+                    ErrorResponse(code, originalResponse.message)
+                }
             } catch (e: java.lang.Exception) {
-                ErrorResponse(-1,"Error occurred. Please, try again later")
+                ErrorResponse(-1, "Error occurred. Please, try again later")
             }
         }
+
         @Keep
         class Exception<out T>(exception: Throwable) : ApiResponse<T>() {
-            val error = ErrorResponse(-1,"Error occurred. Please, try again later")
+            val error = ErrorResponse(-1, "Error occurred. Please, try again later")
         }
     }
     @Keep
@@ -57,6 +68,11 @@ sealed class ApiResponse<out T> {
          */
         fun <T> error(ex: Throwable) = Failure.Exception<T>(ex)
 
+
+        fun <T> getFieldErrorResponse(): ApiResponse<T> {
+            return Failure.Error(null, localFieldError = true)
+        }
+
         /**
          * ApiResponse Factory
          *
@@ -64,17 +80,6 @@ sealed class ApiResponse<out T> {
          * If [retrofit2.Response] has no errors, it will create [ApiResponse.Success]
          * If [retrofit2.Response] has errors, it will create [ApiResponse.Failure.Error]
          */
-        fun <T> of(f: () -> Response<T>): ApiResponse<T> = try {
-            val response = f()
-            if (response.isSuccessful) {
-                Success(response)
-            } else {
-                Failure.Error(response)
-            }
-        } catch (ex: Exception) {
-            Failure.Exception(ex)
-        }
-
         fun <T> create(response: Response<T>): ApiResponse<T> = try {
             if (response.isSuccessful) {
                 Success(response)

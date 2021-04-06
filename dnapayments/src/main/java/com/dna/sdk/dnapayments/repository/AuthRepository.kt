@@ -13,7 +13,6 @@ internal class AuthRepository : Repository, CustomKoinComponent() {
     private val authClient: AuthClient by inject()
     private val clientId = DnaSdkCredentials.clientId
     private val clientSecret = DnaSdkCredentials.clientSecret
-    private val terminalId = DnaSdkCredentials.terminalId
 
     companion object {
         private var INSTANCE: AuthRepository? = null
@@ -42,7 +41,7 @@ internal class AuthRepository : Repository, CustomKoinComponent() {
                 invoiceId,
                 amount,
                 currency,
-                terminalId,
+                DnaSdkCredentials.terminalId,
                 paymentFormUrl,
                 "sdk_android"
             )

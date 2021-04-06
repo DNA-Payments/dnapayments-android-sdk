@@ -105,6 +105,7 @@ object DnaSocketHelperImpl : DnaSocketHelper {
 
     private fun handleResultStatus(result: PaymentResult) {
         close()
+        Logger.logPaymentResult(result)
         if (result.result?.result == "ok") {
             listener.onPaymentSuccess(result)
         } else {

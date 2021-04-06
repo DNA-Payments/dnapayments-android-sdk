@@ -60,8 +60,12 @@ class PaymentFormFragment : ViewModelFragment(), AdapterView.OnItemSelectedListe
     private fun initObservers() {
         viewModel.loadPaymentsLiveData.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { paymentData ->
-                if(paymentData.threeD?.acsUrl == null) {
-                    viewModel.showErrorMessage("acsUrl not returned")
+                if (paymentData.threeD?.acsUrl == null) {
+                    if (paymentData.message.isNullOrBlank()) {
+                        viewModel.showErrorMessage("acsUrl not returned")
+                    } else {
+                        viewModel.showErrorMessage(paymentData.message.orEmpty())
+                    }
                 } else {
                     val directions =
                         PaymentFormFragmentDirections.actionPaymentFormFragmentToPaymentWebFragment(
@@ -74,7 +78,9 @@ class PaymentFormFragment : ViewModelFragment(), AdapterView.OnItemSelectedListe
         })
 
         viewModel.onErrorLiveData.observe(viewLifecycleOwner, Observer {
-            showToast(requireContext(), it)
+            it.getContentIfNotHandled()?.let { message ->
+                showToast(requireContext(), message)
+            }
         })
     }
 
