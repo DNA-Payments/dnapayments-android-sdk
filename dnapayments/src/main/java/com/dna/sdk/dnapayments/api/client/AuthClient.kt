@@ -5,6 +5,7 @@ import com.dna.sdk.dnapayments.api.service.AuthService
 import com.dna.sdk.dnapayments.models.network.AuthToken
 import com.dna.sdk.dnapayments.utils.Logger
 import com.dna.sdk.dnapayments.utils.Validator
+import java.math.BigDecimal
 
 internal class AuthClient(private val service: AuthService) {
 
@@ -14,7 +15,7 @@ internal class AuthClient(private val service: AuthService) {
         clientId: String,
         clientSecret: String,
         invoiceId: String,
-        amount: Double,
+        amount: BigDecimal,
         currency: String,
         terminal: String,
         paymentFormUrl: String,

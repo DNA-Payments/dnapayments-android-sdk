@@ -3,6 +3,7 @@ package com.dna.sdk.dnapayments.domain
 import androidx.annotation.Keep
 import com.dna.sdk.dnapayments.repository.AuthRepository
 import com.dna.sdk.dnapayments.utils.DnaConstants
+import java.math.BigDecimal
 
 @Keep class AuthInteractor {
     init {
@@ -21,7 +22,7 @@ import com.dna.sdk.dnapayments.utils.DnaConstants
 
     suspend fun getUserToken(
         invoiceId: String,
-        amount: Double,
+        amount: BigDecimal,
         currency: String,
         paymentFormUrl: String
     ) = AuthRepository.getInstance()

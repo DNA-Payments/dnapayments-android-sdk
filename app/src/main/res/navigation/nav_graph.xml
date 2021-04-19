@@ -47,7 +47,7 @@
             app:destination="@id/paymentWebFragment" />
         <argument
             android:name="amount"
-            app:argType="float" />
+            app:argType="string" />
         <argument android:name="currency"
             app:argType="string" />
         <argument

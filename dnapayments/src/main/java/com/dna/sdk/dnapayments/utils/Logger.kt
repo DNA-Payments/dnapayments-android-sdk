@@ -8,6 +8,7 @@ import com.dna.sdk.dnapayments.models.network.payments.PaymentData
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import java.math.BigDecimal
 
 object Logger {
     private val isLogging = DnaSdkCredentials.isLogging
@@ -44,7 +45,7 @@ object Logger {
         clientId: String,
         clientSecret: String,
         invoiceId: String,
-        amount: Double,
+        amount: BigDecimal,
         currency: String,
         terminal: String,
         paymentFormURL: String,

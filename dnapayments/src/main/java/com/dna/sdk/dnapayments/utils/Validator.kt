@@ -1,16 +1,28 @@
 package com.dna.sdk.dnapayments.utils
 
 import com.dna.sdk.dnapayments.models.network.payments.PaymentData
+import java.math.BigDecimal
 
 object Validator {
 
     fun isAuthFieldsValidated(
-        amount: Double,
+        amount: BigDecimal,
         currency: String,
         invoiceId: String,
         terminal: String
     ): Boolean {
-        return !(amount <= 0 || currency.isBlank() || invoiceId.isBlank() || terminal.isBlank())
+        return !(!isValidAmount(amount) || currency.isBlank() || invoiceId.isBlank() || terminal.isBlank())
+    }
+
+    private fun isValidAmount(amount: BigDecimal?): Boolean {
+        val regex = """^\d+(?:\.\d{1,2})?$""".toRegex()
+
+        if (amount == null || amount.toDouble() <= 0) {
+            return false
+        } else if (!regex.matches(amount.toString())) {
+            return false
+        }
+        return true
     }
 
     fun isEnrollmentValidated(token: String, paymentData: PaymentData): Boolean {
@@ -20,7 +32,7 @@ object Validator {
 
         return !(paymentData.invoiceId.isNullOrBlank() ||
                 paymentData.terminalId.isNullOrBlank() ||
-                paymentData.amount == null ||
+                !isValidAmount(paymentData.amount) ||
                 paymentData.currency.isNullOrBlank() ||
                 paymentData.ipAddress.isNullOrBlank() ||
                 paymentData.email.isNullOrBlank() ||

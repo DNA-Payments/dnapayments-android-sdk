@@ -14,11 +14,12 @@ import com.dna.sdk.demo.R
 import com.dna.sdk.demo.compose.ViewModelFragment
 import com.dna.sdk.demo.databinding.FragmentPaymentBinding
 import com.dna.sdk.dnapayments.models.network.AuthToken
+import java.math.BigDecimal
 
 class PaymentAuthFragment : ViewModelFragment(), AdapterView.OnItemSelectedListener {
     private lateinit var binding: FragmentPaymentBinding
     private lateinit var viewModel: PaymentAuthViewModel
-    private var amount: Double? = null
+    private var amount: BigDecimal? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +45,7 @@ class PaymentAuthFragment : ViewModelFragment(), AdapterView.OnItemSelectedListe
         populateCurrencySpinner()
 
         binding.btnAuthorise.setOnClickListener {
-            amount = binding.etAmount.text.toString().toDoubleOrNull()
+            amount = binding.etAmount.text.toString().toBigDecimalOrNull()
             amount?.let {
                 viewModel.sendAuthRequest(it)
             } ?: showToast(requireContext(), getString(R.string.invalid_amount))
@@ -67,7 +68,7 @@ class PaymentAuthFragment : ViewModelFragment(), AdapterView.OnItemSelectedListe
         })
 
         binding.etAmount.addTextChangedListener {
-            amount = it.toString().toDoubleOrNull()
+            amount = it.toString().toBigDecimalOrNull()
         }
     }
 
@@ -84,7 +85,7 @@ class PaymentAuthFragment : ViewModelFragment(), AdapterView.OnItemSelectedListe
         val directions =
             PaymentAuthFragmentDirections.actionPaymentFragmentToPaymentFormFragment(
                 token,
-                amount!!.toFloat(),
+                amount.toString(),
                 viewModel.selectedCurrency,
                 viewModel.invoiceId
             )

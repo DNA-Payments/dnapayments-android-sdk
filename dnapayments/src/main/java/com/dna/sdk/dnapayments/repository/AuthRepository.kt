@@ -8,6 +8,7 @@ import com.dna.sdk.dnapayments.utils.CustomKoinComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.inject
+import java.math.BigDecimal
 
 internal class AuthRepository : Repository, CustomKoinComponent() {
     private val authClient: AuthClient by inject()
@@ -28,7 +29,7 @@ internal class AuthRepository : Repository, CustomKoinComponent() {
         grantType: String,
         scope: String,
         invoiceId: String,
-        amount: Double,
+        amount: BigDecimal,
         currency: String,
         paymentFormUrl: String
     ): ApiResponse<AuthToken> {

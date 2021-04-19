@@ -14,6 +14,7 @@ import com.dna.sdk.dnapayments.domain.AuthInteractor;
 import com.dna.sdk.dnapayments.models.network.AuthToken;
 import com.dna.sdk.dnapayments.utils.DnaUtilsKt;
 
+import java.math.BigDecimal;
 import java.util.concurrent.ExecutionException;
 
 public class ExampleInJavaFragment extends Fragment {
@@ -42,7 +43,7 @@ public class ExampleInJavaFragment extends Fragment {
     }
 
     public void sendRequest() {
-        AuthInteractor.Companion.getInstance().getUserToken("1", 10.00, "GBP", "", DnaUtilsKt.getContinuation(
+        AuthInteractor.Companion.getInstance().getUserToken("1", new BigDecimal(10.00), "GBP", "", DnaUtilsKt.getContinuation(
                 (tokenResult, throwable) -> {
                     System.out.println("Coroutines finished");
                     System.out.println("Result: " + tokenResult);

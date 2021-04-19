@@ -1,6 +1,7 @@
 package com.dna.sdk.dnapayments.models.network.payments
 
 import androidx.annotation.Keep
+import java.math.BigDecimal
 
 @Keep
 class PaymentData(
@@ -10,7 +11,7 @@ class PaymentData(
     val email: String?,
     val phone: String?,
     var terminalId: String?,
-    val amount: Double?,
+    val amount: BigDecimal?,
     val ipAddress: String?,
     val currency: String?,
     val transactionType: String?,
@@ -29,7 +30,7 @@ class PaymentData(
         var email: String? = null,
         var phone: String? = null,
         var terminalId: String? = null,
-        var amount: Double? = null,
+        var amount: BigDecimal? = null,
         var ipAddress: String? = null,
         var currency: String? = null,
         var transactionType: String? = null,
@@ -47,7 +48,7 @@ class PaymentData(
         fun setEmail(email: String) = apply { this.email = email }
         fun setPhone(phone: String) = apply { this.phone = phone }
         fun setTerminalId(terminal: String) = apply { this.terminalId = terminal }
-        fun setAmount(amount: Double) = apply { this.amount = amount }
+        fun setAmount(amount: BigDecimal) = apply { this.amount = amount }
         fun setIpAddress(ipAddress: String) = apply { this.ipAddress = ipAddress }
         fun setCurrency(currency: String) = apply { this.currency = currency }
         fun setTransactionType(transactionType: String) =

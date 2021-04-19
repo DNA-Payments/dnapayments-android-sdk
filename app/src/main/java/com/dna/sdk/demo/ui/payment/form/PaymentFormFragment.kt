@@ -30,7 +30,7 @@ class PaymentFormFragment : ViewModelFragment(), AdapterView.OnItemSelectedListe
             val args = PaymentFormFragmentArgs.fromBundle(it)
             token = args.token
             viewModel.selectedCurrency = args.currency
-            viewModel.amount = args.amount.toDouble()
+            viewModel.amount = args.amount.toBigDecimal()
             viewModel.token = token
             viewModel.invoiceId = args.invoiceId
         }

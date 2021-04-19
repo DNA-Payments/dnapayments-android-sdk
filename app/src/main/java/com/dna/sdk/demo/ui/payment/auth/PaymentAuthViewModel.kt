@@ -13,6 +13,7 @@ import com.dna.sdk.dnapayments.domain.AuthInteractor
 import com.dna.sdk.dnapayments.models.network.AuthToken
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 
 class PaymentAuthViewModel : DispatchViewModel() {
 
@@ -30,7 +31,7 @@ class PaymentAuthViewModel : DispatchViewModel() {
      * InvoiceId - must be unique for this transaction.
      * This value must match the value provided during authorisation or the request will be rejected.
      */
-    fun sendAuthRequest(amount: Double) {
+    fun sendAuthRequest(amount: BigDecimal) {
         invoiceId = System.currentTimeMillis().toString()
         progress.set(true)
         launchAuthRequest {

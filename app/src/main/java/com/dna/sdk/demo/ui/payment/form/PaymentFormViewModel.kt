@@ -16,6 +16,7 @@ import com.dna.sdk.dnapayments.models.network.payments.EnrollmentResponse
 import com.dna.sdk.dnapayments.models.network.payments.PaymentData
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 
 class PaymentFormViewModel : DispatchViewModel() {
 
@@ -24,7 +25,7 @@ class PaymentFormViewModel : DispatchViewModel() {
     var progress = ObservableBoolean(false)
 
     var token = ""
-    var amount = 0.0
+    var amount = BigDecimal(0.0)
     var selectedCurrency = ""
     var invoiceId = ""
 
