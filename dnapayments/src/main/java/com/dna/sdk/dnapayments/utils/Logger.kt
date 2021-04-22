@@ -20,19 +20,26 @@ object Logger {
                 val jsonTree: JsonElement = Gson().toJsonTree(paymentData, PaymentData::class.java)
                 val responseJson: JsonObject = jsonTree.asJsonObject
 
+                var cardNumber = paymentData.card?.accountNumber.orEmpty()
+                var maskedCardNumber = "-****-"
+                if(cardNumber.length >= 16) {
+                    maskedCardNumber = cardNumber.substring(0,6) + maskedCardNumber
+                    maskedCardNumber += cardNumber.substring(cardNumber.length - 4)
+                }
+
                 val nested = responseJson.get("card").asJsonObject
-                nested.addProperty("accountNumber", "***")
+                nested.addProperty("accountNumber", maskedCardNumber)
                 nested.addProperty("csc", "***")
-                d(content = "token: $token , data: $responseJson", subTag = "Request")
+                e(content = "token: $token , data: $responseJson", subTag = "Request")
             } catch (ex: Exception) {
-                d(content = "token: $token , data: ${ex.message}", subTag = "Request Log Error")
+                e(content = "token: $token , data: ${ex.message}", subTag = "Request Log Error")
             }
         }
     }
 
     fun logDetails(token: String, id: String) {
         if (isLogging) {
-            d(
+            e(
                 content = "token: $token , txnId: $id",
                 subTag = "Request"
             )
@@ -52,7 +59,7 @@ object Logger {
         source: String
     ) {
         if (isLogging) {
-            d(
+            e(
                 content = "grantType: $grantType , scope: $scope, clientId: $clientId, clientSecret: $clientSecret, invoiceId: $invoiceId, amount: $amount, currency: $currency, terminal: $terminal, paymentFormURL: $paymentFormURL, source: $source",
                 subTag = "Request"
             )
@@ -67,7 +74,7 @@ object Logger {
         source: String
     ) {
         if (isLogging) {
-            d(
+            e(
                 content = "grantType: $grantType , scope: $scope, clientId: $clientId, clientSecret: $clientSecret, source: $source",
                 subTag = "Request"
             )
@@ -78,9 +85,9 @@ object Logger {
         if (isLogging) {
             try {
                 val json = Gson().toJson(response)
-                d(content = json, subTag = "Response")
+                e(content = json, subTag = "Response")
             } catch (ex: Exception) {
-                d(content = "data: ${ex.message}", subTag = "Response Log Error")
+                e(content = "data: ${ex.message}", subTag = "Response Log Error")
             }
         }
     }
@@ -89,14 +96,14 @@ object Logger {
         if (isLogging) {
             try {
                 val json = Gson().toJson(result)
-                d(content = json, subTag = "Response")
+                e(content = json, subTag = "Response")
             } catch (ex: Exception) {
-                d(content = "data: ${ex.message}", subTag = "Response Log Error")
+                e(content = "data: ${ex.message}", subTag = "Response Log Error")
             }
         }
     }
 
-    private fun d(content: String?, subTag: String = "") {
+    private fun e(content: String?, subTag: String = "") {
         if (isLogging) {
             Log.e(TAG + "_" + subTag, content)
         }
